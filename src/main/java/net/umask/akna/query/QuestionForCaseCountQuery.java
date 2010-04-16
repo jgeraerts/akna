@@ -18,6 +18,6 @@ public class QuestionForCaseCountQuery implements Query<Integer> {
 
     @Override
     public Integer execute(Session session) {
-        return (Integer) QuestionsForCaseQuery.createCriteria(session, parentCaseId).setProjection(rowCount()).uniqueResult();
+        return ((Long) QuestionsForCaseQuery.createCriteria(session, parentCaseId).setProjection(rowCount()).uniqueResult()).intValue();
     }
 }
