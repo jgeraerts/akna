@@ -13,8 +13,8 @@ import static org.hibernate.criterion.Projections.rowCount;
 public class CountAllCasesQuery implements Query<Integer> {
     @Override
     public Integer execute(Session session) {
-        return (Integer) session.createCriteria(MaternalCase.class)
+        return ((Long) session.createCriteria(MaternalCase.class)
                 .setProjection(rowCount())
-                .uniqueResult();
+                .uniqueResult()).intValue();
     }
 }
