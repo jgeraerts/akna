@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="Purchase order" xmlns="http://jbpm.org/4.0/jpdl" key="CASE">
+
+  <start>
+    <transition to="task" />
+  </start>
+
+    <task name="task" description="mekker">
+          <transition to="end" description="blaat"/>
+
+    </task>
+
+    <end name="end" />
+
+
+    </process>

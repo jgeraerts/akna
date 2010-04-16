@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wicket="http://wicket.apache.org/"
+        xml:lang="en"
+        lang="en">
+<body>
+<wicket:extend>
+
+
+    <h2>
+        <wicket:message key="add.case">Add Case</wicket:message>
+    </h2>
+    <form wicket:id="form" class="editcase">
+        <label for="title">
+            <wicket:message key="title">Title</wicket:message>
+        </label><input id="title" wicket:id="title"><br/>
+        <textarea wicket:id="body" type="textarea"> </textarea>
+        <input type="submit"/>
+    </form>
+</wicket:extend>
+</body>
+</html>

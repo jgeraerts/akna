@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href="style/site.css"/>
+    <style type="text/css">
+
+
+    </style>
+    <title>AKNA</title>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="header">
+        <img class="logo" src="img/logo.png" alt="Logo"/>
+        <ul class="mainnav">
+            <li wicket:id="home"><span><a wicket:id="link" href="#">Home</a></span></li>
+            <li wicket:id="contact"><span><a wicket:id="link" href="#">Contact</a></span></li>
+            <li wicket:id="help"><span><a wicket:id="link" href="#">Help</a></span></li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="maincontent">
+            <wicket:child/>
+        </div>
+        <div class="leftbar">
+            <div wicket:id="loginPanel"></div>
+            <div wicket:id="userMenuPanel"></div>
+        </div>
+
+
+    </div>
+
+    <br class="clear"/>
+
+    <div class="footer">
+        <p class="copyright">&copy; 2010 Ellen Pipers. All rights reserved.</p>
+    </div>
+</div>
+
+</body>
+</html>

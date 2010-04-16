@@ -1,0 +1,286 @@
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, form, blockquote,br {
+    margin: 0;
+    padding: 0;
+    color: #336699;
+}
+
+pre, code,p,label,a {
+    font-size: 1.5em;
+}
+
+
+h1,h2 {
+   font-family: "Arial Black",serif;
+}
+
+h1 {
+    font-size: 3.5em;
+}
+
+h2 {
+    font-size: 2.5em;
+}
+
+h3 {
+    font-size: 2em;
+}
+
+a {
+    text-decoration: none;
+}
+
+a img {
+    border: none;
+}
+
+body {
+    font-size: 62.5%;
+}
+
+.wrapper {
+    width: 960px;
+    margin: 0 auto 0 auto;
+    padding: 0;
+
+}
+
+.header {
+    background-image: url("../img/header-bg.png");
+    height: 100px;
+    position: relative;
+}
+
+.main {
+    background: transparent url("../img/main-bg.png") repeat-x;
+    min-height: 500px;
+}
+
+.footer {
+    background: transparent url("../img/footer-bg.png") repeat-x;
+    min-height: 30px;
+    margin-top: 20px;
+}
+
+.clear {
+    clear:both;
+}
+
+
+
+.copyright {
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+    padding:9px;
+    
+}
+
+.logo {
+    position: absolute;
+    left: 80px;
+    top: 15px;
+}
+
+ul.mainnav {
+    list-style: none;
+    float: right;
+    margin: 37px 20px;
+
+}
+
+ul.mainnav li {
+    float: left;
+    display: block;
+    height: 32px;
+    padding: 0 0 0 10px;
+    margin: 0 20px 0 0;
+}
+
+ul.mainnav li span {
+    display: block;
+    float: left;
+    height: 32px;
+    padding: 0 10px 0 0;
+}
+
+ul.mainnav li span a {
+    text-align: center;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 1.8em;
+    color: #fff;
+    display: block;
+    float: left;
+    height: 32px;
+    padding: 0 10px 0 10px;
+}
+
+
+
+ul.mainnav li.active,
+    ul.mainnav li.active span,
+    ul.mainnav li.active span a,
+    ul.mainnav li:hover,
+    ul.mainnav li:hover span,
+    ul.mainnav li:hover span a {
+    background: transparent url(../img/menu-select.png) no-repeat scroll 50% 0;
+}
+
+ul.mainnav li.active, ul.mainnav li:hover {
+    background-position: 0 0;
+}
+
+ul.mainnav li.active span, ul.mainnav li:hover span {
+    background-position: 100% 0;
+}
+
+ul.mainnav li.active span a, ul.mainnav li:hover span a {
+    background-position: 50% 0;
+}
+
+.maincontent {
+    width: 600px;
+    margin-left: 310px;
+    padding-right: 50px;
+    padding-top: 50px;
+    float: left;
+}
+
+.leftbar {
+    width: 300px;
+    float: left;
+    margin-left: -960px;
+}
+
+.panel {
+    width: 220px;
+    margin-left: 40px;
+    margin-top: 60px;
+    background:  transparent url(../img/panel-bottom.png) left bottom no-repeat;
+}
+
+.panel div.panelcontent
+ {
+    background: url("../img/panel-top.png") top left no-repeat;
+    padding: 10px;
+    min-height: 179px;
+
+}
+
+.panel h2 {
+    margin-bottom: 5px;
+}
+
+
+input {
+    border: none;
+    margin: 5px 0 5px; 0;
+
+}
+
+.loginfield{
+    width: 100%;
+}
+
+.loginbutton {
+    width: 76px;
+    height: 29px;
+    background: transparent url("../img/loginbutton.png") no-repeat;
+}
+
+
+
+.usermenu a{
+    color: #fff;
+    font-size: 1.75em;
+    padding-left: 10px;
+    margin-top: -4px;
+    font-family:"Arial Black", serif;
+    display:block;
+}
+
+
+.usermenu li {
+    list-style: none;
+    margin: 5px 0;
+    padding: 7px 0;
+}
+
+.usermenu li.active, .usermenu li:hover {
+    background: transparent url("../img/usermenu-select.png") no-repeat;
+}
+.loggedinas  {
+    color: #27ccf5;
+    font-size: 1em;
+}
+
+.clear {
+    clear: both;
+}
+
+.maincontent table {
+
+}
+
+.datatable {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    font-size: 1.5em;
+}
+
+.datatable a,
+.datatable thead,
+.datatable p{
+    font-size: 1em;
+}
+
+
+table.datatable tbody tr.odd td{
+    background: #eeeeee none repeat scroll 0 0;
+}
+
+table.datatable tbody tr:hover td {
+    background-color: #cccccc;
+}
+
+table.datatable td {
+    padding: 5px;
+}
+
+
+.question textarea {
+    width: 100%;
+}
+
+.answercell {
+    width: 420px;
+}
+
+.addanswer,
+.answercell input,
+.answercell textarea
+{
+    width: 420px;
+    border: #E0DFE3 solid 1px;
+}
+
+.titlecol {
+    width: 300px;
+}
+
+.editcase textarea{
+    width: 100%;
+}
+
+fieldset {
+    font-size: 2em;
+}
+
+fieldset span  {
+    font-size: 0.75em;
+
+}
+
+br {
+    height: 5px;
+}

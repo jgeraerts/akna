@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wicket="http://wicket.apache.org/"
+        xml:lang="en"
+        lang="en">
+<body>
+<wicket:extend>
+
+    <a href="#" wicket:id="backLink">go back</a>
+
+    <h2>
+        Question detail
+    </h2>
+
+    <h3>Question</h3>
+    <span class="question" wicket:id="question"></span>
+
+    <h3>Answers</h3>
+
+    <table class="datatable">
+        <tr wicket:id="answers">
+
+            <td class="answercell">
+                <h4>answer</h4>
+                <span wicket:id="answer"></span>
+                <br/>
+                <h4>feedback</h4>
+                <span wicket:id="answerFeedback"></span>
+            </td>
+
+
+            <td>
+                <a href="#" wicket:id="deleteLink">delete</a>
+
+                <a href="#" wicket:id="editNewQuestionLink">edit new Question</a>
+
+            </td>
+        </tr>
+    </table>
+    <form action="#" wicket:id="addAnswerForm">
+        <input class="addanswer" wicket:id="newAnswer"><input type="submit" value="add">
+    </form>
+
+    <h3>Feedback question</h3>
+    <span class="question" wicket:id="questionFeedback"></span>
+
+
+</wicket:extend>
+</body>
+</html>

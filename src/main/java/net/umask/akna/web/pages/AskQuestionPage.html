@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd"
+      xml:lang="da" lang="da">
+<head>
+    <title></title>
+</head>
+<body>
+<wicket:extend>
+    <h2>The test</h2>
+
+    <div class="case" wicket:id="case">
+
+    </div>
+    <br/>
+    <span wicket:id="question"></span>
+    <br/>
+
+    <form wicket:id="answerForm" id="answerForm">
+        <fieldset>
+            <legend>Answers</legend>
+            <div wicket:id="list">
+                <input wicket:id="check" type="checkbox"/>
+                <span wicket:id="answer">test</span>
+
+            </div>
+            <input type="submit" value="save"/>
+        </fieldset>
+    </form>
+
+</wicket:extend>
+
+</body>
+</html>

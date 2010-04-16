@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<questions xmlns="http://umask.net/maternal">
+
+    <casus id="casus1">
+        jantje leert tellen
+    </casus>
+
+    <start id="start">
+        <transition to="vraag1"/>
+    </start>
+
+
+    <question-node id="vraag1" casus="casus1">
+        <question>Hoeveel is 1 + 1</question>
+        <answer to="vraag2">2</answer>
+        <answer to="vraag3">4</answer>
+        <answer to="vraag3">5</answer>
+    </question-node>
+
+    <question-node id="vraag2" casus="casus1">
+        <question>Hoeveel is 1 + 3</question>
+        <answer to="end">2</answer>
+        <answer to="end">4</answer>
+        <answer to="end">5</answer>
+    </question-node>
+
+    <end id="end"></end>
+
+
+
+</questions>
