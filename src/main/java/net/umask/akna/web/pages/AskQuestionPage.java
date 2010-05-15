@@ -7,10 +7,7 @@ import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.transform;
 import net.umask.akna.dto.AnswerDTO;
 import net.umask.akna.dto.MaternalCaseDTO;
-import net.umask.akna.query.GetMaternalCaseDTOByIdQuery;
-import net.umask.akna.query.GetQuestionIdsForSelectedAnswersQuery;
-import net.umask.akna.query.QuestionDetailQuery;
-import net.umask.akna.query.QuestionDetailQueryResult;
+import net.umask.akna.query.*;
 import net.umask.akna.web.MaternalWebSession;
 import net.umask.akna.web.MaternalWicketApplication;
 import org.apache.wicket.markup.html.basic.Label;
@@ -72,8 +69,14 @@ public class AskQuestionPage extends BasePage {
                                                 new IsSelectedPredicate()),
                                         new ExtractIdFunction()));
                 MaternalWebSession.get().popOffCurrentQuestion();
-                MaternalWebSession.get().addNewQuestionIds(MaternalWicketApplication.get().getQueryService().executeQuery(new GetQuestionIdsForSelectedAnswersQuery(selectedAnswerIds)));
-                setResponsePage(new FeedbackPage(currentQuestionId, selectedAnswerIds));
+                if (selectedAnswerIds.size() > 0) {
+                    MaternalWebSession.get().addNewQuestionIds(MaternalWicketApplication.get().getQueryService().executeQuery(new GetQuestionIdsForSelectedAnswersQuery(selectedAnswerIds)));
+                    if (MaternalWicketApplication.get().getQueryService().executeQuery(new HasFeedBackForSelectedAnswers(currentQuestionId, selectedAnswerIds))) {
+                        setResponsePage(new FeedbackPage(currentQuestionId, selectedAnswerIds));
+                        return;
+                    }
+                }
+                setResponsePage(new AskQuestionPage());
 
             }
         });
