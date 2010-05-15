@@ -9,7 +9,7 @@
     <inceptionYear>2009</inceptionYear>
     <properties>
 
-        <wicket.version>1.4.7</wicket.version>
+        <wicket.version>1.4.8</wicket.version>
         <org.springframework.version>3.0.0.RELEASE</org.springframework.version>
          <org.springframework.security.version>3.0.0.RELEASE</org.springframework.security.version>
     </properties>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>com.google.collections</groupId>
             <artifactId>google-collections</artifactId>
-            <version>1.0-rc4</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.wicket</groupId>
@@ -287,24 +287,14 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>3.5.0-CR-1</version>
+            <version>3.5.1-Final</version>
         </dependency>
-
-        <!--
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.5.0-CR-1</version>
-
-        </dependency>
-
-        -->
 
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>3.5.0-CR-1</version>
+            <version>3.5.1-Final</version>
         </dependency>
 
 
