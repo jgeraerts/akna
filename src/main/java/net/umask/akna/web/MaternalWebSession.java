@@ -70,8 +70,8 @@ public class MaternalWebSession extends AuthenticatedWebSession {
         return (MaternalWebSession) AuthenticatedWebSession.get();
     }
 
-    public void initializeQuestionStack() {
-        questionIdStack.addAll(MaternalWicketApplication.get().getQueryService().executeQuery(new GetIdsForMainQuestionsInReverseOrderQuery()));
+    public void initializeQuestionStack(Long caseId) {
+        questionIdStack.addAll(MaternalWicketApplication.get().getQueryService().executeQuery(new GetIdsForMainQuestionsInReverseOrderQuery(caseId)));
     }
 
     public void addNewQuestionIds(List<Long> selectedAnswerIds) {

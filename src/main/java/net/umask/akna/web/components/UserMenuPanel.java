@@ -19,13 +19,8 @@ public class UserMenuPanel extends Panel {
         super(id);
         add(new AccountLink("accountLink").add(new Label("username", MaternalWebSession.get().getUsername())));
 
-        add(new Link("start") {
-            @Override
-            public void onClick() {
-                MaternalWebSession.get().initializeQuestionStack();
-                setResponsePage(AskQuestionPage.class);
-            }
-        });
+
+        add(new ChooseCasePageLink("start"));
         add(new NavigationLinkContainer("accountLink2", new AccountLink(("link"))));
         add(new NavigationLinkContainer("changePasswordLink", new ChangePasswordLink(("link"))));
         add(new NavigationLinkContainer("listCasesLink", new ListCasesLink("link")));

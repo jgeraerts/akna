@@ -4,6 +4,7 @@ import net.umask.akna.dto.MaternalCaseDTO;
 import net.umask.akna.model.MaternalCase;
 import net.umask.akna.service.Query;
 import org.hibernate.Session;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.ProjectionList;
 import static org.hibernate.criterion.Projections.projectionList;
 import static org.hibernate.criterion.Projections.property;
@@ -18,23 +19,31 @@ import java.util.List;
  * Time: 7:31:26
  */
 public class GetAllCasesQuery implements Query<List<MaternalCaseDTO>> {
-    private int first;
-    private int count;
+    private int first=-1;
+    private int count=-1;
 
     public GetAllCasesQuery(int first, int count) {
         this.first = first;
         this.count = count;
     }
 
+    public GetAllCasesQuery() {
+
+    }
+
     @SuppressWarnings({"unchecked"})
     @Override
     public List<MaternalCaseDTO> execute(Session session) {
-        return session.createCriteria(MaternalCase.class)
+        Criteria criteria = session.createCriteria(MaternalCase.class)
                 .setProjection(maternalCaseDTOProjection())
-                .setResultTransformer(maternalCaseDTOTransformer())
-                .setFirstResult(first)
-                .setMaxResults(count)
-                .list();
+                .setResultTransformer(maternalCaseDTOTransformer());
+        if(first > -1){
+            criteria.setFirstResult(first);
+        }
+        if(count > -1){
+            criteria.setMaxResults(count);
+        }
+        return criteria.list();
     }
 
     public static ResultTransformer maternalCaseDTOTransformer() {
