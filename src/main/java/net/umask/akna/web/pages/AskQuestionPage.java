@@ -10,11 +10,11 @@ import net.umask.akna.query.HasFeedBackForSelectedAnswers;
 import net.umask.akna.query.QuestionDetailQueryResult;
 import net.umask.akna.web.MaternalWebSession;
 import net.umask.akna.web.MaternalWicketApplication;
+import net.umask.akna.web.components.HtmlSafeMultiLineLabel;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.basic.MultiLineLabel;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.Link;
@@ -49,7 +49,7 @@ public class AskQuestionPage extends BasePage {
         wrappedAnswers = getWrappedAnswers();
 
         add(new Label("title", new PropertyModel(maternalCaseLoadableDetachableModel, "title")));
-        add(new MultiLineLabel("question", new PropertyModel(currentQuestion, "question.question")));
+        add(new HtmlSafeMultiLineLabel("question", new PropertyModel(currentQuestion, "question.question")));
         final WebMarkupContainer answerContainer = new WebMarkupContainer("answerContainer");
         add(answerContainer);
         answerContainer.setOutputMarkupId(true);
@@ -65,7 +65,7 @@ public class AskQuestionPage extends BasePage {
 
                 answerDTOListItem.add(new CheckBox("check", new PropertyModel<Boolean>(answerDTOListItem.getModel(), "selected")));
                 answerDTOListItem.add(new Label("answer", new PropertyModel<Boolean>(answerDTOListItem.getModel(), "answer.answer")));
-                answerDTOListItem.add(new MultiLineLabel("feedback", new PropertyModel<String>(answerDTOListItem.getModel(), "answer.feedback")) {
+                answerDTOListItem.add(new HtmlSafeMultiLineLabel("feedback", new PropertyModel<String>(answerDTOListItem.getModel(), "answer.feedback")) {
                     @Override
                     public boolean isVisible() {
                         return answerDTOListItem.getModelObject().isSelected();

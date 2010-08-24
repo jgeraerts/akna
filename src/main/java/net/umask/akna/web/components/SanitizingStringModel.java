@@ -1,0 +1,57 @@
+package net.umask.akna.web.components;
+
+import net.umask.akna.web.components.HtmlSafeMultiLineLabel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.PropertyModel;
+import org.owasp.validator.html.*;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: JoGeraerts
+ * Date: 24-aug-2010
+ * Time: 22:54:19
+ * To change this template use File | Settings | File Templates.
+ */
+public class SanitizingStringModel implements IModel<String> {
+    private PropertyModel<String> stringPropertyModel;
+    private static Policy policy;
+
+    public SanitizingStringModel(PropertyModel<String> stringPropertyModel) {
+        this.stringPropertyModel = stringPropertyModel;
+    }
+
+    @Override
+    public String getObject() {
+        AntiSamy as = new AntiSamy();
+        String unsafe = stringPropertyModel.getObject();
+        try {
+            CleanResults cr = as.scan(unsafe,getPolicy());
+            return cr.getCleanHTML();
+        } catch (ScanException e) {
+            throw new RuntimeException(e);
+        } catch (PolicyException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void setObject(String object) {
+        stringPropertyModel.setObject(object);
+    }
+
+    @Override
+    public void detach() {
+        stringPropertyModel.detach();
+    }
+
+    public Policy getPolicy() {
+        if(policy == null){
+            try {
+                policy  = Policy.getInstance(HtmlSafeMultiLineLabel.class.getClassLoader().getResourceAsStream("antisamy-slashdot-1.4.1.xml"));
+            } catch (PolicyException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return policy;
+    }
+}
