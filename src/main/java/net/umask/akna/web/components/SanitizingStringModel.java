@@ -24,6 +24,9 @@ public class SanitizingStringModel implements IModel<String> {
     public String getObject() {
         AntiSamy as = new AntiSamy();
         String unsafe = stringPropertyModel.getObject();
+        if(unsafe == null) {
+            return null;
+        }
         try {
             CleanResults cr = as.scan(unsafe,getPolicy());
             return cr.getCleanHTML();

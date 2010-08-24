@@ -13,5 +13,6 @@ import org.owasp.validator.html.Policy;
 public class HtmlSafeMultiLineLabel extends MultiLineLabel {
    public HtmlSafeMultiLineLabel(String id, PropertyModel<String> stringPropertyModel) {
         super(id,new SanitizingStringModel(stringPropertyModel));
+       setEscapeModelStrings(false);
     }
 }
