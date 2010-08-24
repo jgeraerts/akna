@@ -19,21 +19,32 @@
                 <li>
                     <a href="#" wicket:id="start">Start</a>
                 </li>
-                <li wicket:id="accountLink2">
-                    <a wicket:id="link" href="#">Account</a>
-                </li>
-                <li wicket:id="changePasswordLink">
-                    <a wicket:id="link" href="#">Change password</a>
-                </li>
-                <li wicket:id="listCasesLink">
-                    <a wicket:id="link" href="#">List Cases</a>
-                </li>
-                <li wicket:id="sortQuestionsLink">
-                    <a wicket:id="link" href="#">Sort Questions</a>
-                </li>
-                <li>
-                    <a wicket:id="logout" href="#">Logout</a>
-                </li>
+                <wicket:enclosure child="accountLink2:link">
+                    <li wicket:id="accountLink2">
+                        <a wicket:id="link" href="#">Account</a>
+                    </li>
+                </wicket:enclosure>
+                <wicket:enclosure child="changePasswordLink:link">
+                    <li wicket:id="changePasswordLink">
+                        <a wicket:id="link" href="#">Change password</a>
+                    </li>
+
+                </wicket:enclosure>
+                <wicket:enclosure child="listCasesLink:link">
+                    <li wicket:id="listCasesLink">
+                        <a wicket:id="link" href="#">List Cases</a>
+                    </li>
+                </wicket:enclosure>
+                <wicket:enclosure child="sortQuestionsLink:link">
+                    <li wicket:id="sortQuestionsLink">
+                        <a wicket:id="link" href="#">Sort Questions</a>
+                    </li>
+                </wicket:enclosure>
+                <wicket:enclosure child="logout">
+                    <li>
+                        <a wicket:id="logout" href="#">Logout</a>
+                    </li>
+                </wicket:enclosure>
             </ul>
         </div>
     </div>
