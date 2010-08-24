@@ -33,21 +33,17 @@ import java.util.List;
 public class AskQuestionPage extends BasePage {
     private Long currentQuestionId;
     private QuestionDetailQueryResult currentQuestion;
-    private MaternalCaseDTO currentCase;
+   
     private List<AnswerDTOWrapper> wrappedAnswers;
+    private IModel<MaternalCaseDTO> currentCaseModel;
 
-    public AskQuestionPage() {
+    public AskQuestionPage(final IModel<MaternalCaseDTO> maternalCaseLoadableDetachableModel) {
+        currentCaseModel = maternalCaseLoadableDetachableModel;
         currentQuestionId = getNextQuestionId();
         currentQuestion = getCurrentQuestion();
-        currentCase = getCurrentCase();
+        
         wrappedAnswers = getWrappedAnswers();
-        add(new MultiLineLabel("case", new Model<String>() {
-            @Override
-            public String getObject() {
-                return currentCase != null ? currentCase.getBody() : "";
-            }
-        }
-        ).setEscapeModelStrings(false));
+        add(new Label("title",new PropertyModel(currentCaseModel,"title")));
         add(new MultiLineLabel("question", new Model<String>() {
 
             @Override
@@ -76,7 +72,7 @@ public class AskQuestionPage extends BasePage {
                         return;
                     }
                 }
-                setResponsePage(new AskQuestionPage());
+                setResponsePage(new AskQuestionPage(maternalCaseLoadableDetachableModel));
 
             }
         });
@@ -94,6 +90,10 @@ public class AskQuestionPage extends BasePage {
             }
         });
         listView.setReuseItems(true);
+    }
+
+     {
+
     }
 
     private ImmutableList<AnswerDTOWrapper> getWrappedAnswers() {

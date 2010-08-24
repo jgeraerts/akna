@@ -24,6 +24,10 @@ public class MaternalCaseLoadableDetachableModel extends LoadableDetachableModel
         this(new MaternalCaseDTO());
     }
 
+    public MaternalCaseLoadableDetachableModel(Long id) {
+        this.id=id;
+    }
+
     @Override
     protected MaternalCaseDTO load() {
         if (id == null) {

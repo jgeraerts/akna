@@ -26,8 +26,9 @@ public class ChooseCasePage extends BasePage {
 
                     @Override
                     public void onClick() {
-                        MaternalWebSession.get().initializeQuestionStack(listItem.getModelObject().getId());
-                        setResponsePage(AskQuestionPage.class);
+
+                        setResponsePage(new DisplayCasePage(listItem.getModelObject().getId()));
+
                     }
                 }.add(new Label("label", listItem.getModelObject().getTitle())));
             }
