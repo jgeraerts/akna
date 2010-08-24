@@ -71,6 +71,7 @@ public class MaternalWebSession extends AuthenticatedWebSession {
     }
 
     public void initializeQuestionStack(Long caseId) {
+        questionIdStack.clear();
         questionIdStack.addAll(MaternalWicketApplication.get().getQueryService().executeQuery(new GetIdsForMainQuestionsInReverseOrderQuery(caseId)));
     }
 
