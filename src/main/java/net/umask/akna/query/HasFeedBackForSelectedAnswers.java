@@ -20,28 +20,20 @@ import static org.hibernate.criterion.Projections.rowCount;
  * Time: 13:40:38
  */
 public class HasFeedBackForSelectedAnswers implements Query<Boolean> {
-    private Long currentQuestionId;
+
     private List<Long> selectedAnswerIds;
 
-    public HasFeedBackForSelectedAnswers(Long currentQuestionId, List<Long> selectedAnswerIds) {
-        this.currentQuestionId = currentQuestionId;
+    public HasFeedBackForSelectedAnswers(List<Long> selectedAnswerIds) {
+
         this.selectedAnswerIds = selectedAnswerIds;
     }
 
     @Override
     public Boolean execute(Session session) {
-        Long d = (Long) session.createCriteria(Answer.class, "a")
+        return (Long) session.createCriteria(Answer.class, "a")
                 .add(in("a.id", selectedAnswerIds))
                 .add(Restrictions.isNotNull("feedback"))
                 .setProjection(rowCount())
-                .uniqueResult();
-
-        Long e = (Long) session.createCriteria(Question.class)
-                .add(idEq(currentQuestionId))
-                .add(Restrictions.isNotNull("feedback"))
-                .setProjection(rowCount())
-                .uniqueResult();
-
-        return e > 0 || d > 0;
+                .uniqueResult() > 0;
     }
 }

@@ -3,26 +3,32 @@ package net.umask.akna.web.pages;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
-import static com.google.common.collect.Iterables.filter;
-import static com.google.common.collect.Iterables.transform;
 import net.umask.akna.dto.AnswerDTO;
 import net.umask.akna.dto.MaternalCaseDTO;
-import net.umask.akna.query.*;
+import net.umask.akna.query.GetQuestionIdsForSelectedAnswersQuery;
+import net.umask.akna.query.HasFeedBackForSelectedAnswers;
+import net.umask.akna.query.QuestionDetailQueryResult;
 import net.umask.akna.web.MaternalWebSession;
 import net.umask.akna.web.MaternalWicketApplication;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.basic.MultiLineLabel;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
 import java.io.Serializable;
 import java.util.EmptyStackException;
 import java.util.List;
+
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.transform;
 
 
 /**
@@ -32,31 +38,46 @@ import java.util.List;
  */
 public class AskQuestionPage extends BasePage {
     private Long currentQuestionId;
-    private QuestionDetailQueryResult currentQuestion;
-   
+    private IModel<QuestionDetailQueryResult> currentQuestion;
+
     private List<AnswerDTOWrapper> wrappedAnswers;
-    private IModel<MaternalCaseDTO> currentCaseModel;
+    private boolean formSubmitted = false;
 
     public AskQuestionPage(final IModel<MaternalCaseDTO> maternalCaseLoadableDetachableModel) {
-        currentCaseModel = maternalCaseLoadableDetachableModel;
         currentQuestionId = getNextQuestionId();
         currentQuestion = getCurrentQuestion();
-        
         wrappedAnswers = getWrappedAnswers();
-        add(new Label("title",new PropertyModel(currentCaseModel,"title")));
-        add(new MultiLineLabel("question", new Model<String>() {
 
-            @Override
-            public String getObject() {
-                return currentQuestion.getQuestion().getQuestion();
-            }
-        }
-        ));
+        add(new Label("title", new PropertyModel(maternalCaseLoadableDetachableModel, "title")));
+        add(new MultiLineLabel("question", new PropertyModel(currentQuestion, "question.question")));
+        final WebMarkupContainer answerContainer = new WebMarkupContainer("answerContainer");
+        add(answerContainer);
+        answerContainer.setOutputMarkupId(true);
 
         Form form;
-        add(form = new Form("answerForm") {
+        answerContainer.add(form = new Form("answerForm"));
+
+        ListView<AnswerDTOWrapper> listView;
+        form.add(listView = new ListView<AnswerDTOWrapper>("list", new WrappedAnswersModel()) {
+
             @Override
-            protected void onSubmit() {
+            protected void populateItem(final ListItem<AnswerDTOWrapper> answerDTOListItem) {
+
+                answerDTOListItem.add(new CheckBox("check", new PropertyModel<Boolean>(answerDTOListItem.getModel(), "selected")));
+                answerDTOListItem.add(new Label("answer", new PropertyModel<Boolean>(answerDTOListItem.getModel(), "answer.answer")));
+                answerDTOListItem.add(new MultiLineLabel("feedback", new PropertyModel<String>(answerDTOListItem.getModel(), "answer.feedback")) {
+                    @Override
+                    public boolean isVisible() {
+                        return answerDTOListItem.getModelObject().isSelected();
+                    }
+                });
+
+            }
+        });
+        listView.setReuseItems(true);
+        form.add(new AjaxButton("saveButton") {
+            @Override
+            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 List<Long> selectedAnswerIds =
                         ImmutableList.copyOf(
                                 transform(
@@ -65,39 +86,42 @@ public class AskQuestionPage extends BasePage {
                                                 new IsSelectedPredicate()),
                                         new ExtractIdFunction()));
                 MaternalWebSession.get().popOffCurrentQuestion();
+
                 if (selectedAnswerIds.size() > 0) {
                     MaternalWebSession.get().addNewQuestionIds(MaternalWicketApplication.get().getQueryService().executeQuery(new GetQuestionIdsForSelectedAnswersQuery(selectedAnswerIds)));
-                    if (MaternalWicketApplication.get().getQueryService().executeQuery(new HasFeedBackForSelectedAnswers(currentQuestionId, selectedAnswerIds))) {
-                        setResponsePage(new FeedbackPage(currentQuestionId, selectedAnswerIds));
+                    if (MaternalWicketApplication.get().getQueryService().executeQuery(new HasFeedBackForSelectedAnswers(selectedAnswerIds))) {
+                        formSubmitted = true;
+                        target.addComponent(answerContainer);
                         return;
                     }
                 }
-                setResponsePage(new AskQuestionPage(maternalCaseLoadableDetachableModel));
-
+                forwardToNextPage(maternalCaseLoadableDetachableModel);
             }
-        });
 
-
-        ListView<AnswerDTOWrapper> listView;
-        form.add(listView = new ListView<AnswerDTOWrapper>("list", new WrappedAnswersModel()) {
 
             @Override
-            protected void populateItem(ListItem<AnswerDTOWrapper> answerDTOListItem) {
-
-                answerDTOListItem.add(new CheckBox("check", new PropertyModel<Boolean>(answerDTOListItem.getModel(), "selected")));
-                answerDTOListItem.add(new Label("answer", new PropertyModel<Boolean>(answerDTOListItem.getModel(), "answer.answer")));
-
+            public boolean isVisible() {
+                return !formSubmitted;
             }
         });
-        listView.setReuseItems(true);
+        answerContainer.add(new Link("nextLink") {
+            @Override
+            public void onClick() {
+
+                forwardToNextPage(maternalCaseLoadableDetachableModel);
+            }
+
+            @Override
+            public boolean isVisible() {
+                return formSubmitted;
+            }
+
+        });
     }
 
-     {
-
-    }
 
     private ImmutableList<AnswerDTOWrapper> getWrappedAnswers() {
-        return ImmutableList.copyOf(transform(currentQuestion.getAnswers(), new Function<AnswerDTO, AnswerDTOWrapper>() {
+        return ImmutableList.copyOf(transform(currentQuestion.getObject().getAnswers(), new Function<AnswerDTO, AnswerDTOWrapper>() {
 
             @Override
             public AnswerDTOWrapper apply(AnswerDTO from) {
@@ -106,9 +130,6 @@ public class AskQuestionPage extends BasePage {
         }));
     }
 
-    private MaternalCaseDTO getCurrentCase() {
-        return MaternalWicketApplication.get().getQueryService().executeQuery(new GetMaternalCaseDTOByIdQuery(currentQuestion.getQuestion().getMaternalCaseId()));
-    }
 
     private Long getNextQuestionId() {
         try {
@@ -118,8 +139,22 @@ public class AskQuestionPage extends BasePage {
         }
     }
 
-    private QuestionDetailQueryResult getCurrentQuestion() {
-        return MaternalWicketApplication.get().getQueryService().executeQuery(new QuestionDetailQuery(currentQuestionId));
+    private IModel<QuestionDetailQueryResult> getCurrentQuestion() {
+        return new QuestionDetailLoadableDetachableModel(currentQuestionId);
+    }
+
+    private void forwardToNextPage(IModel<MaternalCaseDTO> maternalCaseLoadableDetachableModel) {
+        if (currentQuestion.getObject().getQuestion().getFeedback() != null && !"".equals(currentQuestion.getObject().getQuestion().getFeedback())) {
+            setResponsePage(new FeedbackPage(currentQuestion, maternalCaseLoadableDetachableModel));
+            return;
+        }
+
+        if (getNextQuestionId() == 0l) {
+            setResponsePage(HomePage.class);
+            return;
+        }
+
+        setResponsePage(new AskQuestionPage(maternalCaseLoadableDetachableModel));
     }
 
 

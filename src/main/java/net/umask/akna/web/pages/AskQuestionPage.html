@@ -6,24 +6,30 @@
 </head>
 <body>
 <wicket:extend>
-    <h2 wicket:id="title"></h2>
+    <h2>Casus: <span wicket:id="title"></span></h2>
 
 
     <br/>
     <span wicket:id="question"></span>
     <br/>
 
-    <form wicket:id="answerForm" id="answerForm">
-        <fieldset>
-            <legend>Answers</legend>
-            <div wicket:id="list">
-                <input wicket:id="check" type="checkbox"/>
-                <span wicket:id="answer">test</span>
+    <div wicket:id="answerContainer">
+        <form wicket:id="answerForm" id="answerForm">
+            <fieldset>
+                <legend>Answers</legend>
+                <div wicket:id="list">
+                    <input wicket:id="check" type="checkbox"/>
+                    <span wicket:id="answer">test</span>
 
-            </div>
-            <input type="submit" value="save"/>
-        </fieldset>
-    </form>
+                    <div class="feedback" wicket:id="feedback">
+
+                    </div>
+                </div>
+            </fieldset>
+            <input type="submit" wicket:id="saveButton" value="save"/>
+        </form>
+        <a href="#" wicket:id="nextLink">Continue</a>
+    </div>
 
 </wicket:extend>
 
