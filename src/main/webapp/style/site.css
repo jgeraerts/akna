@@ -13,6 +13,10 @@ h1,h2 {
    font-family: "Arial Black",serif;
 }
 
+p,a, div {
+    font-family: Georgia, "Times new Roman", serif;
+}
+
 h1 {
     font-size: 3.5em;
 }
@@ -276,11 +280,22 @@ fieldset {
     font-size: 2em;
 }
 
-fieldset span  {
-    font-size: 0.75em;
+fieldset {
+    margin: 10px;
+}
 
+fieldset span{
+    font-size: 0.75em;
+}
+
+fieldset div.feedback {
+    font-size:0.5em;
 }
 
 br {
     height: 5px;
+}
+
+.case, .feedback{
+    margin: 10px;
 }
