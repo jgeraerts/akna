@@ -10,11 +10,11 @@ pre, code,p,label,a {
 
 
 h1,h2 {
-   font-family: "Arial Black",serif;
+   font-family: "Arial Black",sans-serif;
 }
 
 p,a, div {
-    font-family: Georgia, "Times new Roman", serif;
+    font-family: Helvetica, Arial, sans-serif
 }
 
 h1 {
