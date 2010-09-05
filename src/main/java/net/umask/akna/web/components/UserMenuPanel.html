@@ -11,9 +11,9 @@
     <div class="panel">
         <div class="panelcontent">
 
-            <h2>User menu</h2>
+            <h2><wicket:message key="usermenu">User menu</wicket:message></h2>
 
-            <p>You are currently logged in as <a class="loggedinas" wicket:id="accountLink" href="#"><span
+            <p><wicket:message key="usermenu.loggedinas">You are currently logged in as </wicket:message><a class="loggedinas" wicket:id="accountLink" href="#"><span
                     wicket:id="username">Ellen</span></a></p>
             <ul class="usermenu">
                 <li>
@@ -26,23 +26,23 @@
                 </wicket:enclosure>
                 <wicket:enclosure child="changePasswordLink:link">
                     <li wicket:id="changePasswordLink">
-                        <a wicket:id="link" href="#">Change password</a>
+                        <a wicket:id="link" href="#"><wicket:message key="usermenu.changepassword">Change password</wicket:message></a>
                     </li>
 
                 </wicket:enclosure>
                 <wicket:enclosure child="listCasesLink:link">
                     <li wicket:id="listCasesLink">
-                        <a wicket:id="link" href="#">List Cases</a>
+                        <a wicket:id="link" href="#"><wicket:message key="usermenu.listcases">List Cases</wicket:message></a>
                     </li>
                 </wicket:enclosure>
                 <wicket:enclosure child="sortQuestionsLink:link">
                     <li wicket:id="sortQuestionsLink">
-                        <a wicket:id="link" href="#">Sort Questions</a>
+                        <a wicket:id="link" href="#"><wicket:message key="usermenu.sortquestions">Sort Questions</wicket:message></a>
                     </li>
                 </wicket:enclosure>
                 <wicket:enclosure child="logout">
                     <li>
-                        <a wicket:id="logout" href="#">Logout</a>
+                        <a wicket:id="logout" href="#"><wicket:message key="usermenu.logout">Logout</wicket:message></a>
                     </li>
                 </wicket:enclosure>
             </ul>

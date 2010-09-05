@@ -14,6 +14,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Stack;
 
 /**
@@ -24,6 +25,12 @@ import java.util.Stack;
 public class MaternalWebSession extends AuthenticatedWebSession {
     Stack<Long> questionIdStack = new Stack<Long>();
     private Roles roles = new Roles();
+    Locale locale = new Locale("nl");
+
+    @Override
+    public Locale getLocale() {
+        return locale;
+    }
 
     public String getUsername() {
         return username;

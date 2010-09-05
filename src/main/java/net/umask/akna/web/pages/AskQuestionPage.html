@@ -6,7 +6,7 @@
 </head>
 <body>
 <wicket:extend>
-    <h2>Casus: <span wicket:id="title"></span></h2>
+    <h2><wicket:message key="case">Case</wicket:message>: <span wicket:id="title"></span></h2>
 
 
     <br/>
@@ -16,7 +16,7 @@
     <div wicket:id="answerContainer">
         <form wicket:id="answerForm" id="answerForm">
             <fieldset>
-                <legend>Answers</legend>
+                <legend><wicket:message key="answers">Answers</wicket:message></legend>
                 <div wicket:id="list">
                     <input wicket:id="check" type="checkbox"/>
                     <span wicket:id="answer">test</span>
@@ -26,9 +26,9 @@
                     </div>
                 </div>
             </fieldset>
-            <input type="submit" wicket:id="saveButton" value="save"/>
+            <input type="submit" wicket:id="saveButton" wicket:message="value:save" value="save"/>
         </form>
-        <a href="#" wicket:id="nextLink">Continue</a>
+        <a href="#" wicket:id="nextLink"><wicket:message key="continue">Continue </wicket:message></a>
     </div>
 
 </wicket:extend>
