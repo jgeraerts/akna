@@ -54,8 +54,8 @@ public class MaternalWicketApplication extends AuthenticatedWebApplication {
     }
 
     @Override
-    protected Class<LoginPage> getSignInPageClass() {
-        return LoginPage.class;
+    protected Class<HomePage> getSignInPageClass() {
+        return HomePage.class;
     }
 
     public static MaternalWicketApplication get() {

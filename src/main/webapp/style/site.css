@@ -325,3 +325,26 @@ br {
 .case, .feedback{
     margin: 10px;
 }
+
+.feedback {
+    margin:0;
+    border: 0;
+    padding: 0;
+}
+
+.feedback li{
+    list-style: none;
+
+}
+
+.feedbackPanelERROR {
+    border: solid 1px red;
+    background: #fbc2c4;;
+    padding: 10px;
+    font-size: 1.2em;
+    min-height: 7px;
+}
+
+.feedbackPanelERROR span {
+    border: none;
+}

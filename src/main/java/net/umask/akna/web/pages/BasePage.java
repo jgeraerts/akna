@@ -6,6 +6,7 @@ import net.umask.akna.web.components.NavigationLinkContainer;
 import net.umask.akna.web.components.UserMenuPanel;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,6 +20,7 @@ public class BasePage extends WebPage {
         add(new NavigationLinkContainer("contact", new ContactLink("link")));
         add(new NavigationLinkContainer("help", new HelpLink("link")));
 
+        add(new FeedbackPanel("feedback"));
         add(new LoginPanel("loginPanel") {
             @Override
             public boolean isVisible() {

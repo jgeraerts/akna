@@ -4,6 +4,7 @@ import net.umask.akna.dto.MaternalCaseDTO;
 import net.umask.akna.query.GetAllCasesQuery;
 import net.umask.akna.web.MaternalWicketApplication;
 import net.umask.akna.web.MaternalWebSession;
+import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -15,6 +16,7 @@ import org.apache.wicket.markup.html.list.ListView;
  * Date: 31-jul-2010
  * Time: 15:02:22
  */
+@AuthorizeInstantiation({"ROLE_USER"})
 public class ChooseCasePage extends BasePage {
 
     public ChooseCasePage() {

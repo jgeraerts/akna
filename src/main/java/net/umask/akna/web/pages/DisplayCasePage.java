@@ -2,6 +2,7 @@ package net.umask.akna.web.pages;
 
 import net.umask.akna.web.MaternalWebSession;
 import net.umask.akna.web.components.HtmlSafeMultiLineLabel;
+import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.PropertyModel;
@@ -11,6 +12,7 @@ import org.apache.wicket.model.PropertyModel;
  * User: JoGeraerts
  * Date: 24-aug-2010
  */
+@AuthorizeInstantiation({"ROLE_USER"})
 public class DisplayCasePage extends BasePage {
 
     public DisplayCasePage(final Long caseId){
