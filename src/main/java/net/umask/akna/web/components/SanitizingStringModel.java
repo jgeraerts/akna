@@ -1,6 +1,5 @@
 package net.umask.akna.web.components;
 
-import net.umask.akna.web.components.HtmlSafeMultiLineLabel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.owasp.validator.html.*;
@@ -10,13 +9,12 @@ import org.owasp.validator.html.*;
  * User: JoGeraerts
  * Date: 24-aug-2010
  * Time: 22:54:19
- * To change this template use File | Settings | File Templates.
  */
 public class SanitizingStringModel implements IModel<String> {
-    private PropertyModel<String> stringPropertyModel;
+    private IModel<String> stringPropertyModel;
     private static Policy policy;
 
-    public SanitizingStringModel(PropertyModel<String> stringPropertyModel) {
+    public SanitizingStringModel(IModel<String> stringPropertyModel) {
         this.stringPropertyModel = stringPropertyModel;
     }
 
@@ -50,7 +48,7 @@ public class SanitizingStringModel implements IModel<String> {
     public Policy getPolicy() {
         if(policy == null){
             try {
-                policy  = Policy.getInstance(HtmlSafeMultiLineLabel.class.getClassLoader().getResourceAsStream("antisamy-slashdot-1.4.1.xml"));
+                policy  = Policy.getInstance(HtmlSafeMultiLineLabel.class.getClassLoader().getResourceAsStream("antisamy-akna.xml"));
             } catch (PolicyException e) {
                 throw new RuntimeException(e);
             }

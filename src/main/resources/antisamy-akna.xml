@@ -167,6 +167,13 @@ Slashdot allowed tags taken from "Reply" page:
 		<tag name="ul" action="validate"/>
 		<tag name="ol" action="validate"/>
 		<tag name="li" action="validate"/>
+
+        <!-- table tags -->
+        <tag name="table" action="validate"/>
+        <tag name="tbody" action="validate"/>
+        <tag name="thead" action="validate"/>
+        <tag name="tr" action="validate"/>
+        <tag name="td" action="validate"/>
 		
 	</tag-rules>
 

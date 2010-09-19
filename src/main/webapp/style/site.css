@@ -41,6 +41,32 @@ body {
     font-size: 62.5%;
 }
 
+.question table {
+    margin: 10px;
+    width: 50%;
+    border-collapse: collapse;
+    border: 0;
+}
+
+.question table thead td {
+    background-color: #a9a9a9;
+    font-weight:bold;
+}
+
+.question table td.header {
+    background-color: #a9a9a9;
+}
+
+.question table td {
+    background-color: #d3d3d3;
+    font-size: 1.5em;
+    padding: 4px;
+    margin:0;
+    text-align: left;
+    border: #ffffff solid 1px;
+
+}
+
 .wrapper {
     width: 960px;
     margin: 0 auto 0 auto;

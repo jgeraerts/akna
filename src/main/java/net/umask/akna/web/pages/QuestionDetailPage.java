@@ -7,6 +7,7 @@ import net.umask.akna.dto.QuestionDTO;
 import net.umask.akna.web.Constants;
 import net.umask.akna.web.MaternalWicketApplication;
 import org.apache.wicket.PageParameters;
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableMultiLineLabel;
@@ -17,7 +18,12 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
+import wicket.contrib.tinymce.InPlaceEditComponent;
+import wicket.contrib.tinymce.InPlaceSaveBehavior;
+import wicket.contrib.tinymce.settings.TablePlugin;
+import wicket.contrib.tinymce.settings.TinyMCESettings;
 
+import javax.swing.text.Position;
 import java.util.List;
 
 /**
@@ -45,14 +51,24 @@ public class QuestionDetailPage extends BasePage {
                 }
             }
         });
-        add(new AjaxEditableMultiLineLabel<String>("question", new PropertyModel<String>(model, "question.question")) {
+        InPlaceEditComponent inPlaceEditComponent=null;
+        add(inPlaceEditComponent=new InPlaceEditComponent("question", new PropertyModel<String>(model, "question.question")) {
 
             @Override
-            protected void onModelChanged() {
-                MaternalWicketApplication.get().getCommandDispatcher().dispatchCommand(new UpdateQuestionCommand(questionId, model.getObject().getQuestion().getQuestion()));
+            protected InPlaceSaveBehavior createSaveBehavior() {
+                return new InPlaceSaveBehavior(){
+                    @Override
+                    protected String onSave(AjaxRequestTarget target, String newContent) {
+                        MaternalWicketApplication.get().getCommandDispatcher().dispatchCommand(new UpdateQuestionCommand(questionId,newContent));
 
+                        return super.onSave(target, newContent);
+                    }
+                };
             }
         });
+        TablePlugin tablePlugin = new TablePlugin();
+        inPlaceEditComponent.getSettings().add(tablePlugin.getTableControls(), TinyMCESettings.Toolbar.first, TinyMCESettings.Position.after);
+        inPlaceEditComponent.getSettings().setHorizontalResizing(true);
         add(new AjaxEditableMultiLineLabel<String>("questionFeedback", new PropertyModel<String>(model, "question.feedback")) {
             @Override
             protected void onModelChanged() {

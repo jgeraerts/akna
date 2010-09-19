@@ -49,7 +49,7 @@ public class AskQuestionPage extends BasePage {
         wrappedAnswers = getWrappedAnswers();
 
         add(new Label("title", new PropertyModel(maternalCaseLoadableDetachableModel, "title")));
-        add(new HtmlSafeMultiLineLabel("question", new PropertyModel(currentQuestion, "question.question")));
+        add(new HtmlSafeMultiLineLabel("question", new PropertyModel<String>(currentQuestion, "question.question")));
         final WebMarkupContainer answerContainer = new WebMarkupContainer("answerContainer");
         add(answerContainer);
         answerContainer.setOutputMarkupId(true);
