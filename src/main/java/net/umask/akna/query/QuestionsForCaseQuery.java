@@ -5,6 +5,8 @@ import net.umask.akna.model.OrderedCaseQuestionAssociation;
 import net.umask.akna.service.Query;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+
 import static org.hibernate.criterion.Projections.projectionList;
 import static org.hibernate.criterion.Projections.property;
 import static org.hibernate.criterion.Restrictions.eq;
@@ -41,6 +43,7 @@ public class QuestionsForCaseQuery implements Query<List<QuestionDTO>> {
                 .setResultTransformer(aliasToBean(QuestionDTO.class))
                 .setFirstResult(first)
                 .setMaxResults(count)
+                .addOrder(Order.asc("id"))
                 .list();
 
 
