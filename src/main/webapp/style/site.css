@@ -53,8 +53,10 @@ body {
     font-weight:bold;
 }
 
-.question table td.header {
+.question table tbody td.header {
     background-color: #a9a9a9;
+    background-image: none;
+    height: auto;
 }
 
 .question table td {

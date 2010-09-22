@@ -4,6 +4,7 @@ import org.apache.wicket.model.Model;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author JoGeraerts
@@ -21,12 +22,13 @@ public class SanitizingStringModelTest {
                 "<td>def</td>\n" +
                 "</tr>\n" +
                 "<tr>\n" +
-                "<td>dd</td>\n" +
+                "<td class=\"header\">dd</td>\n" +
                 "<td>ddd</td>\n" +
                 "</tr>\n" +
                 "</tbody>\n" +
                 "</table>";
         SanitizingStringModel m = new SanitizingStringModel(new Model<String>(unsanitized));
         assertFalse(m.getObject().contains("<br/>"));
+        assertTrue(m.getObject().contains("class=\"header\""));
     }
 }

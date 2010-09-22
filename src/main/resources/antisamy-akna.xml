@@ -86,6 +86,12 @@ Slashdot allowed tags taken from "Reply" page:
 			</literal-list>
 		</attribute>
 
+        <attribute name="class" description="class attribute">
+            <literal-list>
+                <literal value="header"/>
+            </literal-list>
+        </attribute>
+
 	</common-attributes>
 
 
@@ -173,7 +179,9 @@ Slashdot allowed tags taken from "Reply" page:
         <tag name="tbody" action="validate"/>
         <tag name="thead" action="validate"/>
         <tag name="tr" action="validate"/>
-        <tag name="td" action="validate"/>
+        <tag name="td" action="validate">
+            <attribute name="class"/>
+        </tag>
 		
 	</tag-rules>
 
